@@ -2,6 +2,7 @@ import React ,{useState} from 'react';
 import {View,Text,StyleSheet,FlatList} from 'react-native';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
+import AddItem from './components/AddItem'
 const App=()=>{
   const randomId=()=>{
     return Math.random();
@@ -16,9 +17,16 @@ const App=()=>{
         return prevItems.filter((item)=>item.id!=id);
       })
   }
+  const addItem=(newtext)=>{
+      setItems((prevItems)=>{
+       return [{id:randomId(),text:newtext}, ...prevItems];
+      })
+  }
+
   return(
     <View style={styles.container}>
       <Header title='Shopping List'/>
+      <AddItem addItem={addItem}/>
       <FlatList data={items} keyExtractor={item=>item.id} renderItem={({item})=><ListItem item={item} deleteItem={deleteItem}/>}/>
     </View>
   );
