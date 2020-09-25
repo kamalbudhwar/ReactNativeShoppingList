@@ -11,15 +11,22 @@ const App=()=>{
       {id:randomId(),text:'Eggs'},
       {id:randomId(),text:'Spinach'},
       {id:randomId(),text:'Bread'}]);
+  const deleteItem=(id)=>{
+      setItems((prevItems)=>{
+        return prevItems.filter((item)=>item.id!=id);
+      })
+  }
   return(
     <View style={styles.container}>
       <Header title='Shopping List'/>
-      <FlatList data={items} renderItem={({item})=><ListItem item={item}/>}/>
+      <FlatList data={items} keyExtractor={item=>item.id} renderItem={({item})=><ListItem item={item} deleteItem={deleteItem}/>}/>
     </View>
   );
 }
 const styles=StyleSheet.create({
-  
+  container:{
+   
+  },
 
 });
 export default App;

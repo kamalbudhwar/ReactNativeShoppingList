@@ -1,9 +1,14 @@
 import React from 'react';
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
-const ListItem=({item})=>{
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+const ListItem=(props)=>{
+    const{item,deleteItem}=props;
   return(
     <TouchableOpacity style={styles.listItem}>
-        <View><Text>{item.text}</Text></View>
+        <View style={styles.listItemView}>
+            <Text style={styles.listItemText}>{item.text}</Text>
+            <Icon name="remove" size={20} color='firebrick' onPress={()=>{deleteItem(item.id)}} ></Icon>
+        </View>
     </TouchableOpacity>
   );
 }
@@ -13,6 +18,15 @@ const styles=StyleSheet.create({
       backgroundColor:'#f8f8f8',
       borderBottomWidth:1,
       borderColor:'#eee'
+  },
+  listItemView:{
+    flexDirection:'row',
+    justifyContent:"space-between",
+    alignItems:'center'
+  },
+  listItemText:{
+      fontSize:18,
+
   }
 });
 export default ListItem;
